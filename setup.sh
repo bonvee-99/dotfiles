@@ -44,7 +44,7 @@ if [ ! -d ~/.config/nvim ]; then
 else
   echo "Nvim folder already exists"
 fi
- 
+
 # - font (CaskaydiaCove Nerd Font Mono SemiBold)
 
 # zsh
