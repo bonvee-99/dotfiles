@@ -10,9 +10,7 @@ local config = {
         remote = "origin", -- remote to use
         channel = "stable", -- "stable" or "nightly"
         version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-        branch = "main", -- branch name (NIGHTLY ONLY)
-        commit = nil, -- commit hash (NIGHTLY ONLY)
-        pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
+        branch = "main", -- branch name (NIGHTLY ONLY) commit = nil, -- commit hash (NIGHTLY ONLY) pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
         skip_prompts = false, -- skip prompts about breaking changes
         show_changelog = true, -- show the changelog after performing an update
         auto_reload = false, -- automatically reload and sync packer after a successful update
@@ -45,7 +43,7 @@ local config = {
             wrap = true, -- sets vim.opt.wrap
             laststatus = 3,
             showtabline = 0,
-            cursorline = false,
+            cursorline = true,
             scrolloff = 0, -- Number of lines to keep above and below the cursor
         },
 
@@ -88,7 +86,7 @@ local config = {
     lsp = {
         -- enable servers that you already have installed without mason
         servers = {
-            -- "pyright"
+            -- "rust-analyzer"
         },
         formatting = {
             -- control auto formatting on save
@@ -191,18 +189,21 @@ local config = {
             --   end,
             -- },
             {
+                "christoomey/vim-tmux-navigator"
+            },
+            {
                 "ellisonleao/gruvbox.nvim",
                 as = "gruvbox",
                 config = function()
                     require("gruvbox").setup {}
                 end,
             },
-            {
-                "itchyny/lightline.vim"
-            },
+            -- {
+            --     "itchyny/lightline.vim"
+            -- },
             ["akinsho/bufferline.nvim"] = { disable = true },
-            -- ["p00f/nvim-ts-rainbow"] = { disable = true },
-            ["rebelot/heirline.nvim"] = { disable = true }
+            ["p00f/nvim-ts-rainbow"] = { disable = true },
+            -- ["rebelot/heirline.nvim"] = { disable = true }
         },
         -- All other entries override the require("<key>").setup({...}) call for default plugins
         ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
@@ -236,7 +237,7 @@ local config = {
             -- ensure_installed = { "prettier", "stylua" },
         },
         ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
-            ensure_installed = { "python", "javascript" },
+            -- ensure_installed = { "python", "javascript" },
         },
         ["better_escape"] = {
             mapping = { "kj" }, -- a table with mappings to use
@@ -307,20 +308,9 @@ local config = {
         --   },
         -- }
     end,
-}
+    icons = {
 
--- other stuff
-vim.cmd([[
-  let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'gitbranch#name'
-    \ },
-    \ }
-]])
+    }
+}
 
 return config

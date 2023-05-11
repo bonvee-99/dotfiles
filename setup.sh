@@ -45,6 +45,10 @@ else
   echo "Nvim folder already exists"
 fi
 
+# i3
+ln -s ~/dotfiles/i3 ~/.config/i3
+ln -s ~/dotfiles/compton.conf ~/.config/compton.conf
+
 # - font (CaskaydiaCove Nerd Font Mono SemiBold)
 
 # zsh
