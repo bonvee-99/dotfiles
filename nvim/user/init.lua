@@ -51,10 +51,10 @@ return {
   heirline = {
     -- Set colors for heirline (for some reason it uses light statusline for dark theme)
     colors = {
-      fg = _bg,
-      bg = _fg,
-      section_fg = _fg,
-      section_bg = _fg,
+      fg = "fg",
+      bg = "bg",
+      section_fg = "fg",
+      section_bg = "bg",
     }
   },
 
