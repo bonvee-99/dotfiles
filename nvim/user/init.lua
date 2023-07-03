@@ -50,12 +50,16 @@ return {
 
   heirline = {
     -- Set colors for heirline (for some reason it uses light statusline for dark theme)
-    colors = {
-      fg = "fg",
-      bg = "bg",
-      section_fg = "fg",
-      section_bg = "bg",
-    }
+    colors = function(hl)
+      hl.fg = "fg"
+      hl.bg = "#3c3836"
+      hl.section_fg = "fg"
+      hl.section_bg = "#3c3836"
+      hl.normal = "#458588"
+      hl.insert = "#98971a"
+      hl.visual = "#b16286"
+      return hl
+    end,
   },
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
@@ -111,6 +115,15 @@ return {
           require("gruvbox").setup {}
       end,
     },
+    -- {
+    --   "rebelot/kanagawa.nvim",
+    --   name = "kanagawa",
+    --   config = function()
+    --     require("kanagawa").setup {
+    --       background = { dark = "wave", light = "dragon" }
+    --     }
+    --   end
+    -- },
     {
       "lukas-reineke/indent-blankline.nvim",
       event = "User AstroFile",
@@ -123,9 +136,8 @@ return {
       "max397574/better-escape.nvim",
       event = "InsertCharPre",
       opts = {
-        timeout = 300, 
+        timeout = 300,
         mapping = { "kj" }, -- a table with mappings to use
-        timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
         clear_empty_lines = false, -- clear line after escaping if there is only whitespace
         keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
       }
@@ -168,7 +180,14 @@ return {
         -- return the final configuration table
         return opts
       end,
-    }
+    },
+    {
+      "L3MON4D3/LuaSnip",
+      config = function(plugin, opts)
+        require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
+      end,
+    },
   },
 
   -- This function is run last and is a good place to configuring
